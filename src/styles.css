@@ -11,9 +11,11 @@ body {
   border: 2px solid #000000;
   max-width: 600px;
   margin: 100px auto;
+  margin-bottom: 0;
 }
 .input-box {
   position: relative;
+  padding: 0 0 0 25px;
 }
 .form-control {
   border-radius: 20px;
@@ -43,13 +45,14 @@ body {
 .present-current-day,
 .present-current-temp {
   text-align: center;
-  font-size: large;
-  border: 3px solid #a0a6b4;
+  font-size: 22px;
+  border: 3px solid #dfdfdf;
   width: 80%;
 }
 #degrees {
   position: absolute;
-  right: 25px;
+  right: 20px;
+  font-size: large;
 }
 .present-current-day {
   margin-left: 20%;
@@ -63,11 +66,34 @@ hr {
 .days {
   margin-left: 8%;
 }
+#weather-icon {
+  max-width: 30px;
+  max-height: 30px;
+  position: relative;
+  top: -3px;
+}
 #humidity,
 #wind,
-#current-day-time {
+#current-day-time,
+#weather-description {
   font-size: small;
+}
+/* #current-city {
+  padding-bottom: 30px;
+} */
+#weather-description {
+  text-transform: capitalize;
+  display: inline;
 }
 #linkToGit {
   text-align: center;
+  font-size: smaller;
 }
+#linkRef,
+#celsius,
+#fahrenheit {
+  text-decoration: none;
+}
+/* #celsius {
+  color: black;
+} */

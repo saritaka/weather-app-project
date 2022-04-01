@@ -7,20 +7,49 @@ let days = [
   "Friday",
   "Saturday",
 ];
+
 // Display the current day and time
-let now = new Date();
-let currentDay = now.getDay();
-currentDay = days[currentDay];
-let currentHour = now.getHours();
-if (currentHour < 10) {
-  currentHour = `0${currentHour}`;
+// let now = new Date();
+// let currentDay = now.getDay();
+// currentDay = days[currentDay];
+// let currentHour = now.getHours();
+// if (currentHour < 10) {
+//   currentHour = `0${currentHour}`;
+// }
+// let currentMinute = now.getMinutes();
+// if (currentMinute < 10) {
+//   currentMinute = `0${currentMinute}`;
+// }
+// let presentCurrentDay = document.querySelector("#current-day-time");
+// presentCurrentDay.innerHTML = `${currentDay} ${currentHour}:${currentMinute}`;
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  console.log(date);
+
+  let currentDay = date.getDay();
+  console.log(currentDay);
+  currentDay = days[currentDay];
+  let currentHour = date.getHours();
+  if (currentHour < 10) {
+    currentHour = `0${currentHour}`;
+  }
+  let currentMinute = date.getMinutes();
+  if (currentMinute < 10) {
+    currentMinute = `0${currentMinute}`;
+  }
+  return `Last updated: ${currentDay} ${currentHour}:${currentMinute}`;
 }
-let currentMinute = now.getMinutes();
-if (currentMinute < 10) {
-  currentMinute = `0${currentMinute}`;
-}
-let presentCurrentDay = document.querySelector("#current-day-time");
-presentCurrentDay.innerHTML = `${currentDay} ${currentHour}:${currentMinute}`;
 
 function setTemperature(response) {
   let currentTemp = document.querySelector("#current-temp");
@@ -30,12 +59,27 @@ function setTemperature(response) {
   cityHeader.innerHTML = response.data.name;
 
   console.log(response.data);
+  let weatherDecsription = document.querySelector("#weather-description");
+  weatherDecsription.innerHTML = ` ${response.data.weather[0].description}`;
+  console.log(response.data.weather[0].description);
   document.querySelector(
     "#humidity"
   ).innerHTML = `Humidity: ${response.data.main.humidity}%`;
   document.querySelector("#wind").innerHTML = `| Wind: ${Math.round(
     response.data.wind.speed
   )} km/h`;
+
+  let presentCurrentDay = document.querySelector("#current-day-time");
+  presentCurrentDay.innerHTML = formatDate(response.data.dt * 1000);
+
+  console.log(response.data.weather[0].icon, weatherDecsription);
+
+  let weatherIcon = document.querySelector("#weather-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 function search(city) {
   document.querySelector("#current-city").innerHTML = city;

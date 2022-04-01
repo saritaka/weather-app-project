@@ -54,6 +54,13 @@ body {
   right: 20px;
   font-size: large;
 }
+.present-current-temp .active {
+  color: black;
+  cursor: default;
+}
+.present-current-temp .active :hover {
+  cursor: default;
+}
 .present-current-day {
   margin-left: 20%;
 }
@@ -78,9 +85,6 @@ hr {
 #weather-description {
   font-size: small;
 }
-/* #current-city {
-  padding-bottom: 30px;
-} */
 #weather-description {
   text-transform: capitalize;
   display: inline;
@@ -94,6 +98,3 @@ hr {
 #fahrenheit {
   text-decoration: none;
 }
-/* #celsius {
-  color: black;
-} */

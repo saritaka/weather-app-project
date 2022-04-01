@@ -52,6 +52,8 @@ function formatDate(timestamp) {
 }
 
 function setTemperature(response) {
+  displayedTemp = response.data.main.temp;
+
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = `${Math.round(response.data.main.temp)}°`;
 
@@ -115,14 +117,27 @@ function getCurrentLocation(event) {
 let getCity = document.querySelector("#city-selection");
 getCity.addEventListener("submit", changeCity);
 
-function degreesC() {
+function degreesC(event) {
+  event.preventDefault();
+  //remove the active class from °F and add it to °C
+  fahrenheit.classList.remove("active");
+  celsius.classList.add("active");
+
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "19°";
+  currentTemp.innerHTML = `${Math.round(displayedTemp)}°`;
 }
-function degreesF() {
+function degreesF(event) {
+  event.preventDefault();
+  let fahrenheitTemp = displayedTemp * 1.8 + 32;
+  // remove the active class from °C and add it to °F
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "66°";
+  currentTemp.innerHTML = `${Math.round(fahrenheitTemp)}°`;
 }
+
+let displayedTemp = null;
+
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", degreesC);
 

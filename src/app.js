@@ -1,30 +1,6 @@
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-// Display the current day and time
-// let now = new Date();
-// let currentDay = now.getDay();
-// currentDay = days[currentDay];
-// let currentHour = now.getHours();
-// if (currentHour < 10) {
-//   currentHour = `0${currentHour}`;
-// }
-// let currentMinute = now.getMinutes();
-// if (currentMinute < 10) {
-//   currentMinute = `0${currentMinute}`;
-// }
-// let presentCurrentDay = document.querySelector("#current-day-time");
-// presentCurrentDay.innerHTML = `${currentDay} ${currentHour}:${currentMinute}`;
-
 function formatDate(timestamp) {
   let date = new Date(timestamp);
+
   let days = [
     "Sunday",
     "Monday",
@@ -35,10 +11,7 @@ function formatDate(timestamp) {
     "Saturday",
   ];
 
-  console.log(date);
-
   let currentDay = date.getDay();
-  console.log(currentDay);
   currentDay = days[currentDay];
   let currentHour = date.getHours();
   if (currentHour < 10) {
@@ -73,8 +46,7 @@ function setTemperature(response) {
 
   let presentCurrentDay = document.querySelector("#current-day-time");
   presentCurrentDay.innerHTML = formatDate(response.data.dt * 1000);
-
-  console.log(response.data.weather[0].icon, weatherDecsription);
+  // console.log(response.data.weather[0].icon, weatherDecsription);
 
   let weatherIcon = document.querySelector("#weather-icon");
   weatherIcon.setAttribute(
@@ -83,6 +55,7 @@ function setTemperature(response) {
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
+
 function search(city) {
   document.querySelector("#current-city").innerHTML = city;
   let apiKey = "046240cb2fb8cadf405fbf7a5520ca09";
@@ -92,6 +65,7 @@ function search(city) {
 
   axios.get(apiUrl).then(setTemperature);
 }
+
 function changeCity(event) {
   event.preventDefault();
   let selectedCity = document.querySelector("#selected-city");
@@ -114,9 +88,6 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(handlePosiotion);
 }
 
-let getCity = document.querySelector("#city-selection");
-getCity.addEventListener("submit", changeCity);
-
 function degreesC(event) {
   event.preventDefault();
   //remove the active class from °F and add it to °C
@@ -126,6 +97,7 @@ function degreesC(event) {
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = `${Math.round(displayedTemp)}°`;
 }
+
 function degreesF(event) {
   event.preventDefault();
   let fahrenheitTemp = displayedTemp * 1.8 + 32;
@@ -135,6 +107,9 @@ function degreesF(event) {
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = `${Math.round(fahrenheitTemp)}°`;
 }
+
+let getCity = document.querySelector("#city-selection");
+getCity.addEventListener("submit", changeCity);
 
 let displayedTemp = null;
 

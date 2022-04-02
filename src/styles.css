@@ -74,8 +74,8 @@ hr {
   margin-left: 8%;
 }
 #weather-icon {
-  max-width: 30px;
-  max-height: 30px;
+  max-width: 28px;
+  max-height: 28px;
   position: relative;
   top: -3px;
 }
@@ -88,6 +88,8 @@ hr {
 #weather-description {
   text-transform: capitalize;
   display: inline;
+  position: relative;
+  top: -3px;
 }
 #linkToGit {
   text-align: center;

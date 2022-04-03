@@ -50,9 +50,10 @@ body {
   width: 80%;
 }
 #degrees {
-  position: absolute;
-  right: 20px;
-  font-size: large;
+  position: relative;
+  top: -4px;
+  font-size: 16px;
+  /* margin-bottom: 30px; */
 }
 .present-current-temp .active {
   color: black;
@@ -86,15 +87,13 @@ hr {
   text-transform: capitalize;
   display: inline;
   position: relative;
-  top: -3px;
+  top: -4px;
 }
 #linkToGit {
   text-align: center;
   font-size: smaller;
 }
-#linkRef,
-#celsius,
-#fahrenheit {
+#linkRef {
   text-decoration: none;
 }
 .forecast-week-days {

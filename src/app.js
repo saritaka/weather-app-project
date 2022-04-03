@@ -24,32 +24,58 @@ function formatDate(timestamp) {
   return `Last updated: ${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = date.getDay();
+  day = days[day];
+  return day;
+}
+
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecastData = response.data.daily;
   let forecast = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
-  let days = ["test1", "test2", "test3"];
-
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecastData.forEach(function (day, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
                   <div class="col-2">
-                <div class="forecast-date">${day}</div>
-                <span class="forecast-max-temp"> 20° </span>
-                <span class="forecast-min-temp"> 10° </span>
+                <div class="forecast-date">${formatDay(day.dt)}</div>
+                <span class="forecast-max-temp"> ${Math.round(
+                  day.temp.max
+                )}° </span>
+                <span class="forecast-min-temp"> ${Math.round(
+                  day.temp.min
+                )}° </span>
                 <br />
                 <img
-                  src="http://openweathermap.org/img/wn/01n@2x.png"
+                  src="http://openweathermap.org/img/wn/${
+                    day.weather[0].icon
+                  }@2x.png"
                   alt="forecast-icon"
                   class="forecast-icon"
                   width="28"
                 />
               </div>
     `;
+    }
   });
   forecastHTML = forecastHTML + "</div>";
   forecast.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "046240cb2fb8cadf405fbf7a5520ca09";
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(coordinates.lat);
+  console.log(coordinates.lon);
+  console.log(forecastApiUrl);
+  axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function setTemperature(response) {
@@ -82,12 +108,13 @@ function setTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
+  console.log(response.data.coord);
+  getForecast(response.data.coord);
 }
 
 function search(city) {
   document.querySelector("#current-city").innerHTML = city;
   let apiKey = "046240cb2fb8cadf405fbf7a5520ca09";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
 
@@ -151,4 +178,3 @@ let currentLocation = document.querySelector("#location-button");
 currentLocation.addEventListener("click", getCurrentLocation);
 
 search("New York");
-displayForecast();

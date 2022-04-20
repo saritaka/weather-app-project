@@ -106,3 +106,31 @@ hr {
 .forecast-min-temp {
   opacity: 0.7;
 }
+@media (max-width: 900px) {
+  .card {
+    padding: 25px 10px 25px;
+  }
+  .present-current-temp,
+  .present-current-day {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  #humidity,
+  #wind,
+  #current-day-time,
+  #weather-description,
+  .forecast-max-temp,
+  .forecast-min-temp {
+    font-size: 10px;
+  }
+  .input-box {
+    padding: 0;
+  }
+  #location-button {
+    margin-left: 0;
+  }
+  .forecast-date {
+    font-size: 14px;
+  }
+}
